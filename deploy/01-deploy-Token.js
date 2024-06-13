@@ -7,16 +7,16 @@ module.exports=async({getNamedAccounts,deployments})=>{
     const {deploy,log}=deployments;
     const {deployer}=await getNamedAccounts();
     const chainId=network.config.chainId
-    const Hello=await deploy("Hello",{
+    const Token=await deploy("Token",{
         from:deployer,
-        args:[],
+        args:[100],
         log:true,
         waitConfirmations:network.config.blockConfirmations || 1,
     })
 
     if (network.config.chainId === 11155111 && process.env.ETHERSCAN_API_KEY) {
         console.log("Waiting for block confirmations...")
-        await verify(Hello.address, [])
+        await verify(Token.address, [100])
       }
     
 
